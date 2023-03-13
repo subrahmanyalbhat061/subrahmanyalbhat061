@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+for(i=1;i<=6;i++){
+document.writeln('<h'+i+'>Hello java</h'+i+'>'); 
+}
+for(i=6;i>=1;i--){
+	document.writeln('<h'+i+'>Hello java</h'+i+'>'); 
+	}
+for(i=1;i<=6;i++){
+	document.writeln('Enter Something : <input type='+'text'+'>'); 
+	}
+	prompts=['First Name','Middle Name','Last Name','Phone Number','Area']
+	color=['red','green','yellow','blue','gold'];
+document.writeln('<table border=2px>')
+for(i=0;i<=10;i++){
+	document.writeln('<tr>')
+	document.writeln('<td style='+'background-color:'+color[i]+'>'+'Enter'+prompts[i]+'</td><td> <input type='+'text id=myid'+i+'></td><td><button>Book</button></td')
+	document.writeln('</tr>')
+}
+	document.writeln('</table>')
+</script>
+</head>
+<body>
+<h1>Heading 1</h1>
+<input type="text" value="john">
+<h1>Heading 2</h1>
+
+</body>
+</html>

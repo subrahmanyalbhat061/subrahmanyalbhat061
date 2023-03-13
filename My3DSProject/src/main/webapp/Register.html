@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html> 
+
+<head>
+<meta charset="ISO-8859-1">
+<title>ShriGanesh Airlines</title>
+<link rel="stylesheet" href="myStyle.css">
+<script type="text/javascript">
+     function Validation(){
+    	let mail=document.getElementById("email").value;
+    	let pass =document.getElementById("password").value;
+    	let DOB =document.getElementById("dob").value;
+    	let addr =document.getElementById("address").value;
+    	if(mail==''){
+    		alert('email cannot be empty');
+    		return false;
+    	}
+    	if(pass==''){
+    		alert('Enter Password');
+    		return false;
+    	}
+    	if(DOB==''){
+    		alert('Enter DOB');
+    		return false;
+    	}
+    	if(addr==''){
+    		alert('Enter Address');
+    		return false;
+    	}
+    return true;
+     }
+</script>
+</head>
+
+<body>
+
+<h1 style="background-color: blue;color:white;">
+Please Sign up here</h1>
+<hr>
+<a href="index.html" ><button>Home</button></a>
+<dialog open>
+ <h2>Registration Process</h2>
+ <form action='Login.html'>
+<table>
+  <tr>
+      <td>Enter email :</td>
+      <td> <input type=email id="email"></td> 
+  </tr>
+    <tr>
+      <td>Enter Password:</td>
+      <td><input type=password id="password"> </td> 
+  </tr>
+    <tr>
+      <td>Enter Birth date :</td>
+      <td> <input type=date id='dob'></td> 
+  </tr>
+    <tr>
+      <td>Enter Address : </td>
+      <td><input type=text id='address'></td> 
+  </tr>
+
+</table>
+
+<button onClick="return Validation();">Sign Up</button><br>
+ Already have a Account ?<a href="Login.html"><button>Sign in</button></a>
+
+
+</form>
+</dialog>
+
+</body>
+</html>

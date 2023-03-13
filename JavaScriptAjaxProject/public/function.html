@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+   
+
+    function showMessage(from,text){
+    	from='*'+from+'*';
+    	alert(from+': '+text);
+    }
+    let from='anna';
+    showMessage(from,"Hello");
+    alert(from);
+    
+
+    function showMessage1(from,text="no text given"){
+    	alert(from+': '+text);
+    }
+    text="Overridden";
+    showMessage1("ANNA",text);
+    showMessage1("AKKA");
+    showMessage1("AKKA","is here");
+    
+    function showMessage1(){
+    	return 'End User';
+    }
+    function showMessage1(from,text=showMessage2()){
+    	alert(from+': '+text);
+    }
+    
+    showMessage1("Vishal")
+    
+</script>
+</body>
+</html>

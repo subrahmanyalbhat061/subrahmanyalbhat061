@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="myForm">
+
+   <marquee><h1>Welcome to User Database</h1></marquee>
+   <label for="userId">User ID :</label>
+   <input type="text" id="userId" name="userId" onkeyup="sendInfo()"><br>
+   User Details :<span id="datahere"></span>
+   
+  
+ 
+   
+   </form>
+   <script>
+   function sendInfo(){
+      var v=document.myForm.userId.value;
+      
+      var url="https://jsonplaceholder.typicode.com/users/"+v;
+      
+      if(window.XMLHttpRequest) { //non-microsoft
+			request=new XMLHttpRequest();
+		}
+		else if(window.ActiveXObject) { //Edge/IE
+			request=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+      try
+		{
+			request.onreadystatechange=getInfo;
+			request.open("GET",url,true);
+			request.send();
+		}
+		catch(e)
+		{
+			
+			alert("Unable to connect to server");
+			
+		}
+	  
+   }
+   function getInfo()
+	{
+		if(request.readyState==0) {
+			console.log('request not initialized');
+		}
+		else {
+			console.log('request initialized');
+
+		}
+	
+		if(request.readyState==1) {
+			console.log('connected to the server');
+		}
+		else {
+			console.log('request initialized');
+
+		}
+		
+		if(request.readyState==4) {//HAS 
+			var val=request.responseText;
+		    
+		console.log('getInfo() : val : '+val);
+		
+		val=JSON.parse(val);
+		var arraylist=[];
+		arraylist.push(val)
+		document.write('<table border=2px >')
+		 document.write('<tr>')
+        document.write('<th>ID </th>')
+         document.write('<th>Name </th>')
+        document.write('<th>User Name</th>')
+         document.write('<th>email</th>')
+        document.write('<th>Address</th>')
+        document.write('<th>Phone</th>')
+        document.write('<th>Website</th>')
+
+        
+        
+         for(let i=0;i<=arraylist.length;i++){
+        	 document.write('<tr>')
+        	  document.write('<td>'+arraylist[i].id+'</td>');
+ 			 document.write('<td>'+arraylist[i].name+'</td>');
+ 			  document.write('<td>'+arraylist[i].username+'</td>');
+  			 document.write('<td>'+arraylist[i].email+'</td>');
+  			  document.write('<td><table border=2px><tr><th>Street</th><th>Suite</th><th>City</th><th>Zipcode</th> <tr><td>'+arraylist[i].address.street+'</td><td>'+arraylist[i].address.suite+'</td><td>'+arraylist[i].address.city+'</td><td>'+arraylist[i].address.zipcode+'</td></tr></tr></table></td>');
+  			 document.write('<td>'+arraylist[i].phone+'</td>');
+  			 document.write('<td>'+arraylist[i].website+'</td>');
+        	 document.write('</tr>')
+ 		}
+	
+       document.write('</table>')
+		
+		
+		
+	}
+
+		
+}
+   </script>
+</body>
+</html>

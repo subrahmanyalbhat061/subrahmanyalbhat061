@@ -1,0 +1,27 @@
+table,tr,td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+body{
+ background-image: url('21.jpg');
+background-blend-mode: lighten;
+background-repeat:no-repeat;
+background-size: cover;
+/*margin : auto;
+ width: 70%;
+  padding: 50px;*/
+  
+}
+h1{
+	background-color: blue;
+}
+h2{
+	background-color: #808000;
+}
+dialog{
+	 background-image:url('23.avif');
+	  border-radius: 25px;
+
+}

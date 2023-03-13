@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+ table,td,th{
+  border: 2px solid black;
+  padding-left: 1px;
+ }
+</style>
+</head>
+<body>
+<script>
+  let bankObj=[
+	  {
+		  "AccountNumber":1234,
+		  "AccountHolder":"JACK",
+          "AccountBalance":5000,
+          "AccountOpeningDate":new Date(),
+          "AccountHomeAddress":{
+        	  "Area":"Padmnabnagar",
+        	  "City":"Banglore",
+        	  "Country":"India"
+       }
+  },
+  {
+	  "AccountNumber":1234,
+	  "AccountHolder":"JACK",
+      "AccountBalance":5000,
+      "AccountOpeningDate":new Date(),
+      "AccountHomeAddress":{
+    	  "Area":"Padmnabnagar",
+    	  "City":"Banglore",
+    	  "Country":"India"
+   }
+},
+{
+	  "AccountNumber":1234,
+	  "AccountHolder":"JACK",
+    "AccountBalance":5000,
+    "AccountOpeningDate":new Date(),
+    "AccountHomeAddress":{
+  	  "Area":"Padmnabnagar",
+  	  "City":"Banglore",
+  	  "Country":"India"
+ }
+}
+  ];
+  for(let i=0;i<bankObj.length;i++){
+  document.write('<table cellpadding="2x">')
+  
+  document.write('<tr>')
+  document.write('<th>Account Number </th>')
+  document.write('<th>Account Holder </th>')
+  document.write('<th>AccountBalance</th>')
+  document.write('<th>Opening Date</th>')
+  document.write('<th>Address</th>')
+  document.write('</tr>')
+  
+   document.write('<tr>')
+  document.write('<td>'+bankObj[i].AccountNumber+'</td>')
+  document.write('<td>'+bankObj[i].AccountHolder+'</td>')
+  document.write('<td>'+bankObj[i].AccountBalance+'</td>')
+   document.write('<td>'+bankObj[i].AccountOpeningDate+'</td>')
+   document.write('<td><table><tr><th>Area</th><th>City</th><th>Country</th></tr><tr><td>' +bankObj[i].AccountHomeAddress.Area+'</td><td>'+bankObj[i].AccountHomeAddress.City+'</td><td>'+ bankObj[i].AccountHomeAddress.Country+'</tr></table></td>')
+  document.write('</tr>')
+  
+  document.write('</table>')
+  }
+  </script>
+</body>
+</html>
