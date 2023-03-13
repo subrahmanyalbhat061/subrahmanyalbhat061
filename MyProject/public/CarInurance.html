@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Car Insurance</title>
+<style>
+
+</style>
+</head>
+<body>
+  <h1>Details Submitted By Users</h1>
+       <script>
+       let CustomerDetails=[
+    	   {
+    		   "Brand":"Maruti Suzuki",
+    		   "Model":"Swift",
+    		   "Variant":"VXI",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"Maruti Suzuki",
+    		   "Model":"Swift",
+    		   "Variant":"ZXI",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA32",
+    		   "Year of Buying":"2002"	   
+    	   },
+    	   {
+    		   "Brand":"Maruti Suzuki",
+    		   "Model":"Alto800",
+    		   "Variant":"LXI",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA30",
+    		   "Year of Buying":"2015"	   
+    	   },
+    	   {
+    		   "Brand":"Maruti Suzuki",
+    		   "Model":"Alto800",
+    		   "Variant":"LXI OPT",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2010"	   
+    	   },
+    	   {
+    		   "Brand":"Maruti Suzuki",
+    		   "Model":"Dzire",
+    		   "Variant":"AMT VDI",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"Maruti Suzuki",
+    		   "Model":"Dzire",
+    		   "Variant":"AMT ZDI",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"Maruti Suzuki",
+    		   "Model":"WagonR",
+    		   "Variant":"LXI",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"Maruti Suzuki",
+    		   "Model":"WagonR",
+    		   "Variant":"AX",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"TATA Motors",
+    		   "Model":"Indica",
+    		   "Variant":"DLE",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"TATA Motors",
+    		   "Model":"Indica",
+    		   "Variant":"DL",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"TATA Motors",
+    		   "Model":"Safari",
+    		   "Variant":"DICOR 2.2 EX",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"TATA Motors",
+    		   "Model":"Safari",
+    		   "Variant":"DICOR 2.2 GX",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   }
+    	   ,
+    	   {
+    		   "Brand":"Hyundai",
+    		   "Model":"Grand i10",
+    		   "Variant":"Kappa LPG",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   }
+    	   ,
+    	   {
+    		   "Brand":"Hyundai",
+    		   "Model":"Venue",
+    		   "Variant":"S+",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   }
+    	   ,
+    	   {
+    		   "Brand":"Hyundai",
+    		   "Model":"Venue",
+    		   "Variant":"S",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   }
+    	   ,
+    	   {
+    		   "Brand":"Toyota",
+    		   "Model":"Inova",
+    		   "Variant":"2.0 G3",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   }
+    	   ,
+    	   {
+    		   "Brand":"Toyota",
+    		   "Model":"Inova",
+    		   "Variant":"2.0 G2",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   },
+    	   {
+    		   "Brand":"Toyota",
+    		   "Model":"Qualis",
+    		   "Variant":"FS B1",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   }
+    	   ,
+    	   {
+    		   "Brand":"Toyota",
+    		   "Model":"Qualis",
+    		   "Variant":"FS B2",
+    		   "Fuel Type":"Petrol",
+    		   "RTO" :"KA31",
+    		   "Year of Buying":"2001"	   
+    	   }
+    	   
+       ]
+       document.write('<table>')
+       document.write('<tr>')
+       document.write('<th>Brand</th>')
+       document.write('<th>Model</th>')
+       document.write('<th>Variant</th>')
+       document.write('<th>Fuel Type</th>')
+       document.write('<th>RTO</th>')
+       document.write('<th>Year of Buying</th>')
+       document.write('</tr>')
+       
+       </script>
+</body>
+</html>
