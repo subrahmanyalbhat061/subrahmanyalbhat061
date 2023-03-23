@@ -78,14 +78,14 @@ public void updateTest() {
 	Assertions.assertTrue(l!=null);
 	
 	Bill b=new Bill();
-	ClaimRequest m=c.getClaimRequestByToken(6);
+	ClaimRequest m=c.getClaimRequestByToken(2);
 	Assertions.assertTrue(m!=null);
 	
 	m.setStatus_("Accepted");
 	double d=l.getAmount(m.getBillId());
 	int token=m.getTokenId();
 	m.setAmountClaimed(d);
-	m.setTokenId(token);
+
 	
 	c.updateClaimRequest(m);
 	

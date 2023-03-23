@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+var request;
+
+
+function sendInfo()
+{
+	var customerId=document.myform.customerid.value;
+	console.log(customerId);
+	
+	var policyId=document.myform.policyid.value;
+	console.log(policyId);
+	
+	var firId=document.myform.firid.value;
+	console.log(firId);
+	
+	var billId=document.myform.billid.value;
+	console.log(billId);
+	
+	var cause=document.myform.claim_cause.value;
+	console.log(cause);
+	
+	var dataToSend = {
+	        "policyId": 1,
+	        "fid": 1,
+	        "billId": 1,
+	        "cause":"xyz",
+	        "customerId":1            
+	 }
+	console.log('>>before data : '+JSON.stringify(dataToSend));
+	
+	dataToSend.policyId=policyId;
+	dataToSend.fid=firId;
+	dataToSend.billId=billId;
+	dataToSend.cause=cause;
+	dataToSend.customerId=customerId;
+	
+	console.log('>>after data : '+JSON.stringify(dataToSend));
+			
+	var url='http://localhost:8080/GeneralInsuranceProject/rest/claim/createClaims/';
+		
+	console.log('sendInfo: url : '+url);
+	if(window.XMLHttpRequest) { //non-microsoft
+		request=new XMLHttpRequest();
+	}
+	else if(window.ActiveXObject) { //Edge/IE
+		request=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	try
+	{
+		request.onreadystatechange=getInfo;
+		request.open("POST",url,true);
+		request.setRequestHeader("Content-Type","application/json");
+		request.send(JSON.stringify(dataToSend));
+		
+	}
+	catch(e)
+	{
+		
+		alert("Unable to connect to server"+e);
+		
+	}
+	
+	
+}
+
+function sendInfo1()
+{
+	var customerId=document.myform.customerid.value;
+	console.log(customerId);
+	
+			
+	var url='http://localhost:8080/GeneralInsuranceProject/rest/claim/getClaim/'+customerId;
+	
+	console.log('sendInfo: url : '+url);
+	if(window.XMLHttpRequest) { //non-microsoft
+		request=new XMLHttpRequest();
+	}
+	else if(window.ActiveXObject) { //Edge/IE
+		request=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	try
+	{
+		request.onreadystatechange=getInfo;
+		request.open("GET",url,true);
+		request.send();
+		
+	}
+	catch(e)
+	{
+		
+		alert("Unable to connect to server"+e);
+		
+	}
+	
+	
+}
+function getInfo()
+{
+	if(request.readyState==0) {
+		console.log('request not initialized');
+	}
+	else {
+		console.log('request initialized');
+
+	}
+
+	if(request.readyState==1) {
+		console.log('connected to the server');
+	}
+	else {
+		console.log('request initialized');
+
+	}
+
+	//0 REQUEST TILL NOT INTIALIZED
+	//1 CONNECTED TO THE SERVER
+	//2 REQUEST IS RECIEVED BY TEH SERVER
+	//3 REQUEST IS PROCESSING
+	//4 REQUEST IS DONE AND RESPONSE IS READY
+	if(request.readyState==4) {//HAS 
+		console.log('status '+request.status);
+		var val=request.responseText;
+		document.getElementById('dataHere').innerHTML=val;
+	}
+	
+}
+
+</script>
+</head>
+<body>
+
+<form name="myform"> 
+	<label for name="customerid">Enter CustomerId :</label>
+	<input type="text" id="customerid" name="customerid">
+	<br>
+	<label for name="policyid">Enter PolicyId :</label>
+	<input type="text" id="policyid" name="policyid">
+	<br>
+	<label for name=firid">Enter FirId :</label>
+	<input type="text" id="firid" name="firid">
+	<br>
+	<label for name=billid">Enter BillId :</label>
+	<input type="text" id="billid" name="billid">
+	<br>
+	<input list="cause" name="claim_cause"  >
+	<datalist id="cause">
+		<option value="Accident">Accident</option>
+		<option value="Car Theft">Car Theft</option>
+		<option value="Natural Disaster">Natural Disaster</option>			
+	</datalist>
+	<Input type=button value="ClaimRequest" onclick="sendInfo()">
+	<br>
+    <Input type=button value="GetClaimRequest" onclick="sendInfo1()">
+</form>
+<br>
+<b>Status :<span id="dataHere"> </span></b>
+</body>
+</html>

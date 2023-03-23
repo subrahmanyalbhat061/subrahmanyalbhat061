@@ -75,7 +75,7 @@ public class ClaimRequestServiceTest {
 			double d=l.getAmount(m.getBillId());
 			int token=m.getTokenId();
 		    m.setAmountClaimed(d);
-			m.setTokenId(token);
+			
 			
 			c.updateClaimRequest(m);
 		} catch (ClaimRequestForParticularTokenNotFoundException e) {
