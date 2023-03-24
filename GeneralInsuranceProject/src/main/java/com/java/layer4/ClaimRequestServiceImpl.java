@@ -97,15 +97,10 @@ public class ClaimRequestServiceImpl implements ClaimRequestService {
 	}
 
 	@Override
-	public List<ClaimRequest> getClaimRequestById(int customerId) throws ClaimRequestForParticularCustomerIdNotFoundException2 {
+	public List<ClaimRequest> getClaimRequestById(int customerId)  {
 		// TODO Auto-generated method stub
 		List<ClaimRequest> claimList=claim.getClaimRequestById(customerId);
-		if(claimList.size()>0) {
-			return claimList;
-		}
-		else {
-			throw new ClaimRequestForParticularCustomerIdNotFoundException2("Claim Request with CustomerId "+customerId+" Not Found");
-		}
+		return claimList;
 	}
 
 	@Override

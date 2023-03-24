@@ -6,7 +6,7 @@ import com.java.layer2.ClaimRequest;
 
 public interface ClaimRequestService {
   void createClaimRequest(ClaimRequest c)throws PolicyNotFoundException,BillNotFoundException,FirNotFoundException,claimRequestAlreadyExistsException;//user
-  List<ClaimRequest> getClaimRequestById(int customerId)throws ClaimRequestForParticularCustomerIdNotFoundException2;
+  List<ClaimRequest> getClaimRequestById(int customerId);
   
   ClaimRequest getClaimRequestByToken(int tokenid)throws ClaimRequestForParticularTokenNotFoundException;//admin
   void updateClaimRequest(ClaimRequest c);//admin

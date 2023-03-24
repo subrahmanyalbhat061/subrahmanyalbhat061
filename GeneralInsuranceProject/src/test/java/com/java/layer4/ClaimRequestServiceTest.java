@@ -107,15 +107,12 @@ public class ClaimRequestServiceTest {
 			Assertions.assertTrue(c!=null);
 			
 			
-			try {
-				List<ClaimRequest> list = c.getClaimRequestById(1004);
+			
+				List<ClaimRequest> list = c.getClaimRequestById(1003);
 				for(ClaimRequest m:list) {
 					System.out.println(m);
 				}
-			} catch (ClaimRequestForParticularCustomerIdNotFoundException2 e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
+			
 			
 		}
 	

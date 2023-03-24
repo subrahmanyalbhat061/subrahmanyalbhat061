@@ -1,12 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="User.css">
+  
 <title>Insert title here</title>
+<style>
+input{
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+
+}
+</style>
 <script>
+
 var request;
 
+//For Getting the Data for a Particular Customer in a table format
+async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+   
+   show(data);
+}
+function show(data) {
+	 
+    if(data.length!=0){
+    let tab = 
+        `<tr>
+          <th>Token Id</th>
+          <th>Policy Id</th>
+          <th>Fir Id</th>
+          <th>Bill Id</th>
+          <th>Cause</th>
+          <th>Status</th>
+          <th>Customer Id</th>
+          <th>Amount Claimed</th>
+         </tr>`;
+    
+    // Loop to access all rows 
+    for (let r of data) {
+        tab += `<tr> 
+    <td>${r.tokenId} </td>
+    <td>${r.policyId}</td>
+    <td>${r.fid}</td> 
+    <td>${r.billId}</td>   
+    <td>${r.cause}</td>
+    <td>${r.status_}</td>
+    <td>${r.customerId}</td>
+    <td>${r.amountClaimed}</td> 
+</tr>`;
+    document.getElementById("claimRequest").innerHTML = tab;
+    }
+    }
+    else{
+    	
+         alert('No Claim History');
+    }
+}
+function sendInfo1()
+{
+	var customerId=document.myform.customerid.value;
+	console.log(customerId);
+	
+	 if(customerId==""){
+	      alert("Enter Customer Id:");
+		   }
+	 else{
+	var url='http://localhost:8080/GeneralInsuranceProject/rest/claim/getClaim/'+customerId;
 
+	 getapi(url);
+	 }
+	
+}
+
+
+//For Posting the data into ClaimRequest Table entered by Customer for Claim Module
 function sendInfo()
 {
 	var customerId=document.myform.customerid.value;
@@ -24,6 +100,26 @@ function sendInfo()
 	var cause=document.myform.claim_cause.value;
 	console.log(cause);
 	
+   if(customerId==""){
+      alert("Customer Id field is empty");
+	   }
+
+   else if(policyId==""){
+      alert("Policy Id field is empty");
+	   }
+
+   else if(firId==""){
+      alert("Fir Id field is empty");
+	   }
+
+   else if(billId==""){
+      alert("Bill Id field is empty");
+	   }
+   else if(cause==""){
+	  alert("Cause Filed is Empty") ;
+   }
+   
+   else{
 	var dataToSend = {
 	        "policyId": 1,
 	        "fid": 1,
@@ -66,41 +162,10 @@ function sendInfo()
 		
 	}
 	
+   }
 	
 }
 
-function sendInfo1()
-{
-	var customerId=document.myform.customerid.value;
-	console.log(customerId);
-	
-			
-	var url='http://localhost:8080/GeneralInsuranceProject/rest/claim/getClaim/'+customerId;
-	
-	console.log('sendInfo: url : '+url);
-	if(window.XMLHttpRequest) { //non-microsoft
-		request=new XMLHttpRequest();
-	}
-	else if(window.ActiveXObject) { //Edge/IE
-		request=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	try
-	{
-		request.onreadystatechange=getInfo;
-		request.open("GET",url,true);
-		request.send();
-		
-	}
-	catch(e)
-	{
-		
-		alert("Unable to connect to server"+e);
-		
-	}
-	
-	
-}
 function getInfo()
 {
 	if(request.readyState==0) {
@@ -128,38 +193,43 @@ function getInfo()
 		console.log('status '+request.status);
 		var val=request.responseText;
 		document.getElementById('dataHere').innerHTML=val;
-	}
 	
+}
 }
 
 </script>
 </head>
 <body>
-
-<form name="myform"> 
+<h1>USER PAGE</h1>
+   
+<form name="myform" style="   font-family: Arial, Helvetica, sans-serif;"> 
 	<label for name="customerid">Enter CustomerId :</label>
-	<input type="text" id="customerid" name="customerid">
+	<input type="text" id="customerid" name="customerid" placeholder="eg : 1001">
 	<br>
 	<label for name="policyid">Enter PolicyId :</label>
-	<input type="text" id="policyid" name="policyid">
+	<input type="text" id="policyid" name="policyid" placeholder="eg : 101">
 	<br>
 	<label for name=firid">Enter FirId :</label>
-	<input type="text" id="firid" name="firid">
+	<input type="text" id="firid" name="firid" placeholder="eg : 1">
 	<br>
 	<label for name=billid">Enter BillId :</label>
-	<input type="text" id="billid" name="billid">
+	<input type="text" id="billid" name="billid" placeholder="eg : 2">
 	<br>
+	<label for name=cause">Select Cause :</label>
 	<input list="cause" name="claim_cause"  >
 	<datalist id="cause">
 		<option value="Accident">Accident</option>
 		<option value="Car Theft">Car Theft</option>
 		<option value="Natural Disaster">Natural Disaster</option>			
 	</datalist>
-	<Input type=button value="ClaimRequest" onclick="sendInfo()">
 	<br>
-    <Input type=button value="GetClaimRequest" onclick="sendInfo1()">
+	<Input type=button value="Claim" onclick="sendInfo()" >
+	<br>
+	 <Input type=button value="GetClaimRequest" onclick="sendInfo1()">
+
 </form>
 <br>
-<b>Status :<span id="dataHere"> </span></b>
+<table id="claimRequest"> </table>
+<span id="data"></span>
 </body>
 </html>

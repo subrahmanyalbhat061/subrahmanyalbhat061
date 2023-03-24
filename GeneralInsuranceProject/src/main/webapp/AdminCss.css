@@ -1,0 +1,33 @@
+@charset "ISO-8859-1";
+#ClaimRequest{
+   font-family: Arial, Helvetica, sans-serif;
+   border-collapse: collapse;
+   width: 100%;
+}
+#Firs{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+#Bills{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+td,th{
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0494aa;
+  color: white;
+}
+.button {
+  padding: 5px 5px;
+  text-align: center;
+  font-size: 16px;
+}

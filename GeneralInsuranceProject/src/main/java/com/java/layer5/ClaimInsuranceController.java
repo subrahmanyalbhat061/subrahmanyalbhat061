@@ -10,16 +10,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
+import com.java.layer2.Bill;
 import com.java.layer2.ClaimRequest;
+import com.java.layer2.Fir;
 import com.java.layer4.BillNotFoundException;
 import com.java.layer4.BillService;
 import com.java.layer4.BillServiceImpl;
-import com.java.layer4.ClaimRequestForParticularCustomerIdNotFoundException2;
 import com.java.layer4.ClaimRequestForParticularTokenNotFoundException;
 import com.java.layer4.ClaimRequestService;
 import com.java.layer4.ClaimRequestServiceImpl;
 import com.java.layer4.FirNotFoundException;
+import com.java.layer4.FirService;
+import com.java.layer4.FirServiceImpl;
 import com.java.layer4.PolicyNotFoundException;
 import com.java.layer4.claimRequestAlreadyExistsException;
 
@@ -29,6 +31,7 @@ import com.java.layer4.claimRequestAlreadyExistsException;
 public class ClaimInsuranceController {
      ClaimRequestService claim=new ClaimRequestServiceImpl();
      BillService l=new BillServiceImpl();
+     FirService fir=new FirServiceImpl();
      
      public ClaimInsuranceController() {
  		System.out.println("Claim Request Service called");
@@ -47,6 +50,7 @@ public class ClaimInsuranceController {
  public String createClaimRequest(ClaimRequest c) {
  	  
  	 try {
+ 		 
 		claim.createClaimRequest(c);
 		return "ClaimRequest Created Succesfully";
 	} catch (PolicyNotFoundException e) {
@@ -73,16 +77,10 @@ public class ClaimInsuranceController {
    @Produces(MediaType.APPLICATION_JSON)
    public List<ClaimRequest> getClaimRequests(@PathParam("customerId") int customerId){
 	    
-	try {
+	
 		List<ClaimRequest>claimList = claim.getClaimRequestById(customerId);
 		return claimList;
-	} catch (ClaimRequestForParticularCustomerIdNotFoundException2 e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	   return null;
-  }
-   
+   }
 
 	 @PUT 
 	 @Path("/update/{status}/{tokenId}")
@@ -92,7 +90,12 @@ public class ClaimInsuranceController {
 			int bill=c.getBillId();
 			double amount1=l.getAmount(bill);
 		    c.setStatus_(status);
+		    if(c.getStatus_().equalsIgnoreCase("Accepted")) {
 			c.setAmountClaimed(amount1);
+			}
+		    else {
+		    	c.setAmountClaimed(0);
+		    }
 			claim.updateClaimRequest(c);
 			return "Update Successfull";
 		} catch (ClaimRequestForParticularTokenNotFoundException e) {
@@ -102,4 +105,21 @@ public class ClaimInsuranceController {
 		 
 			return "Update not Successfull";
 		}
+	 
+	   
+	   @GET
+	   @Path("/getFirs")
+	   @Produces(MediaType.APPLICATION_JSON)
+	   public List<Fir> getFirs(){
+		   List<Fir> FirList=fir.getFirs();
+		   return FirList;
+	  }
+	   
+	   @GET
+	   @Path("/getBills")
+	   @Produces(MediaType.APPLICATION_JSON)
+	   public List<Bill> getBills(){
+		   List<Bill> BillList=l.getBills();
+		   return BillList;
+	  }
 }

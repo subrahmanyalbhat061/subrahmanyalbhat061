@@ -2,14 +2,9 @@
 <html lang="en">
     <head>
         <title>Admin</title>
-        <style>
-        table, th, td {
-         border: 1px solid;
-         }
-        </style>
+        <link rel="stylesheet" href="AdminCss.css">
     </head>
-    <body>
-    <script>
+     <script>
     
  // Defining async function
  async function getapi(url) {
@@ -21,11 +16,40 @@
      var data = await response.json();
      console.log(data);
      show(data);
+     
  }
+ async function getapi1(url) {
+     
+     // Storing response
+     const response = await fetch(url);
+     
+     // Storing data in form of JSON
+     var data = await response.json();
+     console.log(data);
+     show1(data);
+     
+ }  
+ async function getapi2(url) {
+     
+     // Storing response
+     const response = await fetch(url);
+     
+     // Storing data in form of JSON
+     var data = await response.json();
+     console.log(data);
+     show2(data);
+     
+ }
+ 
+ 
  
  // Calling that async function
  getapi("http://localhost:8080/GeneralInsuranceProject/rest/claim/getClaims");
-   
+ getapi1("http://localhost:8080/GeneralInsuranceProject/rest/claim/getFirs");
+ getapi2("http://localhost:8080/GeneralInsuranceProject/rest/claim/getBills");
+ function fun() {
+	 location.reload();
+	 } 
 function myFunction(tokenId){
 	url="http://localhost:8080/GeneralInsuranceProject/rest/claim/update/Accepted/"+tokenId;
 	
@@ -42,7 +66,6 @@ function myFunction(tokenId){
 		request.onreadystatechange=getInfo;
 		request.open("PUT",url,true);
 		request.send();
-		getapi("http://localhost:8080/GeneralInsuranceProject/rest/claim/getClaims");
 		
 	}
 	catch(e)
@@ -69,6 +92,7 @@ function myFunction1(tokenId){
 		request.open("PUT",url,true);
 		request.send();
 		
+		
 	}
 	catch(e)
 	{
@@ -77,6 +101,7 @@ function myFunction1(tokenId){
 		
 	}
 }
+
 function getInfo()
 {
 	if(request.readyState==0) {
@@ -103,13 +128,13 @@ function getInfo()
 	if(request.readyState==4) {//HAS 
 		console.log('status '+request.status);
 		var val=request.responseText;
-		document.getElementById('dataHere').innerHTML=val;
+		fun();
 	}
 	
 }
  function show(data) {
 	 
-	 let url;
+	 
      let tab = 
          `<tr>
            <th>Token Id</th>
@@ -120,7 +145,8 @@ function getInfo()
            <th>Status</th>
            <th>Customer Id</th>
            <th>Amount Claimed</th>
-           <th>Action</th>
+           <th colspan="2">Action</th>
+           
           </tr>`;
      
      // Loop to access all rows 
@@ -135,16 +161,65 @@ function getInfo()
      <td>${r.customerId}</td>
      <td>${r.amountClaimed}</td> 
      
-     <td><button onclick="myFunction(${r.tokenId})">Accept</button></td>
-     <td><button onclick="myFunction1(${r.tokenId})">Reject</button></td>
+     <td><button class="button"onclick="myFunction(${r.tokenId})">Accept</button></td>
+     <td><button class="button"onclick="myFunction1(${r.tokenId})">Reject</button></td>
  </tr>`;
      document.getElementById("ClaimRequest").innerHTML = tab;
      }
  }
-    </script>
+function show1(data) {
+	 
+	
+     let tab = 
+         `<tr>
+           <th>Fir Id</th>
+           <th>Case Description</th>
+           <th>Filled Date</th>
+         
+          </tr>`;
+     
+     // Loop to access all rows 
+     for (let r of data) {
+         tab += `<tr> 
+     <td>${r.firId} </td>
+     <td>${r.caseDescription}</td>
+     <td>${r.filedDate}</td> 
+     
+     
+ </tr>`;
+     document.getElementById("Firs").innerHTML = tab;
+
+     }
+ }
+function show2(data) {
+	 
+	
+    let tab = 
+        `<tr>
+          <th>Bill Id</th>
+          <th>Bill Amount</th>
+          
         
-        <h1>Claim Requests</h1>
+         </tr>`;
+    
+    // Loop to access all rows 
+    for (let r of data) {
+        tab += `<tr> 
+    <td>${r.billId} </td>
+    <td>${r.billAmount}</td>
+    
+    
+    
+</tr>`;
+    document.getElementById("Bills").innerHTML = tab;
+    }
+}
+    </script>
+    <body>
+        <h1>ADMINISTRATOR PAGE</h1>
         <table id="ClaimRequest"></table>
-       <b>Status :<span id="dataHere"> </span></b>
+        <br>
+        <table id="Firs"></table>
+        <table id="Bills"></table>
     </body>
 </html>
